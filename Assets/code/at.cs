@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [Header("ÉèÖÃ")]
-    public int damageAmount = 20;      // ÉËº¦ÊýÖµ
-    public float attackRange = 2.0f;   // ¹¥»÷¾àÀë
-    public LayerMask enemyLayer;       // µÐÈËËùÔÚµÄÍ¼²ã(Layer)
+    [Header("ï¿½ï¿½ï¿½ï¿½")]
+    public int damageAmount = 20;      // ï¿½Ëºï¿½ï¿½ï¿½Öµ
+    public float attackRange = 2.0f;   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public LayerMask enemyLayer;       // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Í¼ï¿½ï¿½(Layer)
 
-    [Header("×é¼þÒýÓÃ")]
-    public Animator animator;          // ¶¯»­¿ØÖÆÆ÷
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
+    public Animator animator;          // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
     void Update()
     {
-        // 0ÊÇ×ó¼ü£¬1ÊÇÓÒ¼ü£¬2ÊÇÖÐ¼ü
+        // 0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½Ò¼ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½Ð¼ï¿½
         if (Input.GetMouseButtonDown(0))
         {
             PerformAttack();
@@ -21,37 +21,56 @@ public class PlayerAttack : MonoBehaviour
 
     void PerformAttack()
     {
-        // 1. ²¥·Å¹¥»÷¶¯»­ (ÐèÒªÔÚAnimatorÀïÉèÖÃÒ»¸öÃûÎª "Attack" µÄ Trigger)
+        // 1. ï¿½ï¿½ï¿½Å¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½Òªï¿½ï¿½Animatorï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Îª "Attack" ï¿½ï¿½ Trigger)
         if (animator != null)
         {
             animator.SetTrigger("Attack");
         }
 
-        // 2. ·¢ÉäÉäÏß¼ì²âÇ°·½µ¥Î»
-        // origin: ÉäÏßµÄÆðµã (Î»ÖÃÉÔÎ¢Ì§¸ßÒ»µã£¬·ÀÖ¹´òµ½µØÃæ)
-        Vector3 rayOrigin = transform.position + Vector3.up * 1.0f;
-        // direction: ÉäÏßµÄ·½Ïò (½ÇÉ«Ãæ³¯µÄ·½Ïò)
-        Vector3 rayDirection = transform.forward;
+        // 2. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Î»
+        // origin: ï¿½ï¿½ï¿½ßµï¿½ï¿½ï¿½ï¿½ (Î»ï¿½ï¿½ï¿½ï¿½Î¢Ì§ï¿½ï¿½Ò»ï¿½ã£¬ï¿½ï¿½Ö¹ï¿½òµ½µï¿½ï¿½ï¿½)
+        Vector2 rayOrigin = transform.position;
+        // direction: ï¿½ï¿½ï¿½ßµÄ·ï¿½ï¿½ï¿½ (ï¿½ï¿½É«ï¿½æ³¯ï¿½Ä·ï¿½ï¿½ï¿½)
+        Vector2 rayDirection = new Vector2(1, 0);
 
-        RaycastHit hit;
-
-        // ·¢ÉäÉäÏß
-        if (Physics.Raycast(rayOrigin, rayDirection, out hit, attackRange, enemyLayer))
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, rayDirection, attackRange, enemyLayer);
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        if (hit != null && hit.collider != null)
         {
-            // ¼ì²é±»´òÖÐµÄÎïÌåÊÇ·ñÓÐÉúÃüÖµ½Å±¾
+            // ï¿½ï¿½é±»ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½Å±ï¿½
             EnemyHealth enemy = hit.collider.GetComponent<EnemyHealth>();
 
             if (enemy != null)
             {
                 enemy.TakeDamage(damageAmount);
 
-                // ¿ÉÑ¡£ºÔÚÕâÀïÌí¼Ó»÷ÖÐÌØÐ§»òÒôÐ§
-                Debug.Log("»÷ÖÐÁË " + hit.collider.name);
+                // ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó»ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½Ð§
+                Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ " + hit.collider.name);
+            }
+        }else{
+            rayOrigin = transform.position;
+            // direction: ï¿½ï¿½ï¿½ßµÄ·ï¿½ï¿½ï¿½ (ï¿½ï¿½É«ï¿½æ³¯ï¿½Ä·ï¿½ï¿½ï¿½)
+            rayDirection = new Vector2(-1, 0);
+
+            hit = Physics2D.Raycast(rayOrigin, rayDirection, attackRange, enemyLayer);
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+           if (hit != null && hit.collider != null)
+            {
+                // ï¿½ï¿½é±»ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½Å±ï¿½
+                EnemyHealth enemy = hit.collider.GetComponent<EnemyHealth>();
+
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(damageAmount);
+
+                    // ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó»ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½Ð§
+                    Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ " + hit.collider.name);
+                }
             }
         }
     }
 
-    // ÔÚ±à¼­Æ÷ÖÐ»æÖÆ¹¥»÷·¶Î§¸¨ÖúÏß (½öScene´°¿Ú¿É¼û)
+    // ï¿½Ú±à¼­ï¿½ï¿½ï¿½Ð»ï¿½ï¿½Æ¹ï¿½ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½Sceneï¿½ï¿½ï¿½Ú¿É¼ï¿½)
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

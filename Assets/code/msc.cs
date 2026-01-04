@@ -3,25 +3,25 @@ using System.Collections;
 
 public class MonsterController : MonoBehaviour
 {
-    [Header("»ù´¡ÊôÐÔ")]
-    public float moveSpeed = 3.5f;        // ÒÆ¶¯ËÙ¶È
-    public float detectionRange = 10f;    // Ë÷µÐ·¶Î§
-    public int damageToPlayer = 10;       // ¶ÔÍæ¼ÒÔì³ÉµÄÉËº¦
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
+    public float moveSpeed = 3.5f;        // ï¿½Æ¶ï¿½ï¿½Ù¶ï¿½
+    public float detectionRange = 10f;    // ï¿½ï¿½ï¿½Ð·ï¿½Î§
+    public int damageToPlayer = 10;       // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éµï¿½ï¿½Ëºï¿½
 
-    [Header("ËÀÍö¶¯»­²ÎÊý")]
-    public float hitStopDuration = 0.2f;  // ±»»÷ÖÐºóµÄÍ£ÖÍÊ±¼ä£¨¶ÙÖ¡¸Ð£©
-    public float shakeDuration = 0.5f;    // ¶¶¶¯³ÖÐøÊ±¼ä
-    public float shakeIntensity = 0.1f;   // ¶¶¶¯·ù¶È
-    public float retreatDistance = 2.0f;  // ºó³·¾àÀë
-    public float retreatSpeed = 5.0f;     // ºó³·ËÙ¶È
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
+    public float hitStopDuration = 0.2f;  // ï¿½ï¿½ï¿½ï¿½ï¿½Ðºï¿½ï¿½Í£ï¿½ï¿½Ê±ï¿½ä£¨ï¿½ï¿½Ö¡ï¿½Ð£ï¿½
+    public float shakeDuration = 0.5f;    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+    public float shakeIntensity = 0.1f;   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public float retreatDistance = 2.0f;  // ï¿½ó³·¾ï¿½ï¿½ï¿½
+    public float retreatSpeed = 5.0f;     // ï¿½ï¿½ï¿½Ù¶ï¿½
 
     private Transform playerTarget;
-    private bool isDead = false;          // ÊÇ·ñÒÑËÀÍö
+    private bool isDead = false;          // ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private Rigidbody rb;
 
     void Start()
     {
-        // ×Ô¶¯Ñ°ÕÒ³¡¾°ÖÐ±êÇ©Îª "Player" µÄÎïÌå
+        // ï¿½Ô¶ï¿½Ñ°ï¿½Ò³ï¿½ï¿½ï¿½ï¿½Ð±ï¿½Ç©Îª "Player" ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
         {
@@ -33,34 +33,34 @@ public class MonsterController : MonoBehaviour
 
     void Update()
     {
-        // Èç¹ûËÀÁË»òÕßÃ»ÕÒµ½Íæ¼Ò£¬¾Í²»Ö´ÐÐAIÂß¼­
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë»ï¿½ï¿½ï¿½Ã»ï¿½Òµï¿½ï¿½ï¿½Ò£ï¿½ï¿½Í²ï¿½Ö´ï¿½ï¿½AIï¿½ß¼ï¿½
         if (isDead || playerTarget == null) return;
 
         float distance = Vector3.Distance(transform.position, playerTarget.position);
 
-        // ÔÚ·¶Î§ÄÚÔò×·ÖðÍæ¼Ò
+        // ï¿½Ú·ï¿½Î§ï¿½ï¿½ï¿½ï¿½×·ï¿½ï¿½ï¿½ï¿½ï¿½
         if (distance <= detectionRange)
         {
-            ChasePlayer();
+            // ChasePlayer();
         }
     }
 
-    // ¼òµ¥µÄ×·ÖðÂß¼­
+    // ï¿½òµ¥µï¿½×·ï¿½ï¿½ï¿½ß¼ï¿½
     void ChasePlayer()
     {
-        // ÃæÏòÍæ¼Ò
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         transform.LookAt(new Vector3(playerTarget.position.x, transform.position.y, playerTarget.position.z));
 
-        // ÏòÇ°ÒÆ¶¯
+        // ï¿½ï¿½Ç°ï¿½Æ¶ï¿½
         transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
     }
 
-    // Åö×²¼ì²â£ºÅöµ½Íæ¼ÒÔì³ÉÉËº¦
+    // ï¿½ï¿½×²ï¿½ï¿½â£ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½
     void OnCollisionEnter(Collision collision)
     {
         if (isDead) return;
 
-        // ¼ì²é×²µ½µÄÊÇ²»ÊÇÍæ¼Ò
+        // ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½Ç²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
@@ -68,35 +68,35 @@ public class MonsterController : MonoBehaviour
             {
                 playerHealth.TakeDamage(damageToPlayer);
 
-                // ¼òµ¥µÄ×²»÷·´µ¯Ð§¹û£¨¿ÉÑ¡£©
+                // ï¿½òµ¥µï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½
                 if (rb != null) rb.AddForce(-transform.forward * 5f, ForceMode.Impulse);
             }
         }
     }
 
-    // --- ±»Íæ¼Ò¹¥»÷µÄÂß¼­ (¶ÔÓ¦ÄãÔ­À´½Å±¾ÀïµÄ monster.TakeHit()) ---
+    // --- ï¿½ï¿½ï¿½ï¿½Ò¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½ (ï¿½ï¿½Ó¦ï¿½ï¿½Ô­ï¿½ï¿½ï¿½Å±ï¿½ï¿½ï¿½ï¿½ monster.TakeHit()) ---
     public void TakeHit()
     {
-        if (isDead) return; // ·ÀÖ¹±ÞÊ¬
+        if (isDead) return; // ï¿½ï¿½Ö¹ï¿½ï¿½Ê¬
 
-        // ¿ªÆôËÀÍöÐ­³Ì
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½
         StartCoroutine(DeathSequence());
     }
 
-    // ºËÐÄ£ºËÀÍöÑÝ³öµÄÐ­³Ì
+    // ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½Ð­ï¿½ï¿½
     IEnumerator DeathSequence()
     {
         isDead = true;
 
-        // ¹Ø±ÕÎïÀíÅö×²£¬·ÀÖ¹Ê¬Ìåµ²Â·»ò¼ÌÐøÔì³ÉÉËº¦
+        // ï¿½Ø±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½Ö¹Ê¬ï¿½åµ²Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½
         Collider col = GetComponent<Collider>();
         if (col != null) col.enabled = false;
-        if (rb != null) rb.isKinematic = true; // Í£Ö¹ÎïÀíÔËËã
+        if (rb != null) rb.isKinematic = true; // Í£Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-        // 1. Í£ÖÍ (Hit Stop) - Ä£Äâ´ò»÷¸Ð£¬Ë²¼ä²»¶¯
+        // 1. Í£ï¿½ï¿½ (Hit Stop) - Ä£ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½Ë²ï¿½ä²»ï¿½ï¿½
         yield return new WaitForSeconds(hitStopDuration);
 
-        // 2. ¶¶¶¯ (Shake)
+        // 2. ï¿½ï¿½ï¿½ï¿½ (Shake)
         float elapsed = 0f;
         Vector3 originalPos = transform.position;
 
@@ -105,30 +105,30 @@ public class MonsterController : MonoBehaviour
             float x = Random.Range(-1f, 1f) * shakeIntensity;
             float z = Random.Range(-1f, 1f) * shakeIntensity;
 
-            // ÔÚÔ­Î»ÖÃ»ù´¡ÉÏËæ»úÆ«ÒÆ
+            // ï¿½ï¿½Ô­Î»ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ«ï¿½ï¿½
             transform.position = originalPos + new Vector3(x, 0, z);
 
             elapsed += Time.deltaTime;
-            yield return null; // µÈ´ýÏÂÒ»Ö¡
+            yield return null; // ï¿½È´ï¿½ï¿½ï¿½Ò»Ö¡
         }
 
-        // »Ö¸´Î»ÖÃ×¼±¸ºó³·
+        // ï¿½Ö¸ï¿½Î»ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½
         transform.position = originalPos;
 
-        // 3. ºó³· (Retreat) - ¿ìËÙÏòºó»¬¶¯²¢±äÍ¸Ã÷£¨Èç¹û²ÄÖÊÖ§³Ö£©»òÖ±½ÓÏûÊ§
+        // 3. ï¿½ï¿½ (Retreat) - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó»¬¶ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ï¿½Ö£ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½Ê§
         elapsed = 0f;
         Vector3 startPos = transform.position;
-        Vector3 endPos = transform.position - transform.forward * retreatDistance; // Ïòºó·½ÒÆ¶¯
+        Vector3 endPos = transform.position - transform.forward * retreatDistance; // ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
 
-        while (elapsed < 0.5f) // ºó³·¹ý³Ì³ÖÐø0.5Ãë
+        while (elapsed < 0.5f) // ï¿½ó³·¹ï¿½ï¿½Ì³ï¿½ï¿½ï¿½0.5ï¿½ï¿½
         {
-            // Æ½»¬²åÖµÒÆ¶¯
+            // Æ½ï¿½ï¿½ï¿½ï¿½Öµï¿½Æ¶ï¿½
             transform.position = Vector3.Lerp(startPos, endPos, elapsed / 0.5f);
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        // 4. ÏûÊ§ (Destroy)
+        // 4. ï¿½ï¿½Ê§ (Destroy)
         Destroy(gameObject);
     }
 }

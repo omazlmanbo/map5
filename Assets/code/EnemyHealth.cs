@@ -10,11 +10,11 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    // ½ÓÊÕÉËº¦µÄ¹«¹²·½·¨
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½ï¿½Ä¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
-        Debug.Log(gameObject.name + " ÊÜµ½ÉËº¦: " + amount + " | Ê£ÓàÑªÁ¿: " + currentHealth);
+        Debug.Log(gameObject.name + " ï¿½Üµï¿½ï¿½Ëºï¿½: " + amount + " | Ê£ï¿½ï¿½Ñªï¿½ï¿½: " + currentHealth);
 
         if (currentHealth <= 0)
         {
@@ -24,8 +24,8 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
-        Debug.Log(gameObject.name + " ÒÑËÀÍö£¡");
-        // ÕâÀï¿ÉÒÔÌí¼ÓÏú»ÙÎïÌå»ò²¥·ÅËÀÍö¶¯»­µÄÂß¼­
-        // Destroy(gameObject); 
+        Debug.Log(gameObject.name + " ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò²¥·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½
+        Destroy(gameObject); 
     }
 }
