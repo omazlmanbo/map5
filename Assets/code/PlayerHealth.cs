@@ -1,21 +1,21 @@
 using UnityEngine;
-using UnityEngine.UI; // ±ØÐëÒýÓÃ£¬ÓÃÓÚ¿ØÖÆÆÁÄ»±äºÚ
+using UnityEngine.UI; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½
 using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [Header("»ù´¡ÊôÐÔ")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     public int maxHealth = 100;
     private int currentHealth;
 
-    [Header("×é¼þÒýÓÃ (ÐèÒªÊÖ¶¯ÍÏ×§)")]
-    public Animator animator;              // Íæ¼ÒµÄ¶¯»­¿ØÖÆÆ÷
-    public MonoBehaviour movementScript;   // Íæ¼ÒµÄÒÆ¶¯½Å±¾ (ÀýÈç PlayerController)
-    public Image blackScreenPanel;         // UIÉÏµÄºÚÉ«Í¼Æ¬ (ÓÃÓÚÕÚµ²ÆÁÄ»)
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½Òªï¿½Ö¶ï¿½ï¿½ï¿½×§)")]
+    public Animator animator;              // ï¿½ï¿½ÒµÄ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public MonoBehaviour movementScript;   // ï¿½ï¿½Òµï¿½ï¿½Æ¶ï¿½ï¿½Å±ï¿½ (ï¿½ï¿½ï¿½ï¿½ PlayerController)
+    public Image blackScreenPanel;         // UIï¿½ÏµÄºï¿½É«Í¼Æ¬ (ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½Ä»)
 
-    [Header("ËÀÍöÉèÖÃ")]
-    public string deathAnimTrigger = "Die"; // ¶¯»­»úÀïµÄ Trigger Ãû×Ö
-    public float fadeSpeed = 0.5f;          // ÆÁÄ»±äºÚµÄËÙ¶È
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
+    public string deathAnimTrigger = "Die"; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Trigger ï¿½ï¿½ï¿½ï¿½
+    public float fadeSpeed = 0.5f;          // ï¿½ï¿½Ä»ï¿½ï¿½Úµï¿½ï¿½Ù¶ï¿½
 
     private bool isDead = false;
 
@@ -23,25 +23,25 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
 
-        // ÓÎÏ·¿ªÊ¼Ê±£¬È·±£ºÚÆÁ½çÃæÊÇÒþ²Ø»òÍ¸Ã÷µÄ
+        // ï¿½ï¿½Ï·ï¿½ï¿½Ê¼Ê±ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø»ï¿½Í¸ï¿½ï¿½ï¿½ï¿½
         if (blackScreenPanel != null)
         {
             blackScreenPanel.gameObject.SetActive(false);
             Color c = blackScreenPanel.color;
-            c.a = 0; // Í¸Ã÷¶ÈÉèÎª0
+            c.a = 0; // Í¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª0
             blackScreenPanel.color = c;
         }
     }
 
-    // --- ¹©Íâ²¿ (¹ÖÎï) µ÷ÓÃµÄÊÜÉËº¯Êý ---
+    // --- ï¿½ï¿½ï¿½â²¿ (ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½Ëºï¿½ï¿½ï¿½ ---
     public void TakeDamage(int damage)
     {
-        if (isDead) return; // ËÀÁË¾Í²»ÔÙÊÜÉËº¦
+        if (isDead) return; // ï¿½ï¿½ï¿½Ë¾Í²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½
 
         currentHealth -= damage;
-        Debug.Log($"Íæ¼ÒÊÜµ½ÉËº¦: -{damage}, µ±Ç°ÑªÁ¿: {currentHealth}");
+        Debug.Log($"ï¿½ï¿½ï¿½ï¿½Üµï¿½ï¿½Ëºï¿½: -{damage}, ï¿½ï¿½Ç°Ñªï¿½ï¿½: {currentHealth}");
 
-        // ÕâÀï¿ÉÒÔ¼ÓÒ»¸ö ÊÜÉË¶¯»­ (Hurt)
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½Ò»ï¿½ï¿½ ï¿½ï¿½ï¿½Ë¶ï¿½ï¿½ï¿½ (Hurt)
         // if (animator != null) animator.SetTrigger("Hurt");
 
         if (currentHealth <= 0)
@@ -54,23 +54,23 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = true;
 
-        // 1. ²¥·ÅËÀÍö¶¯»­
+        // 1. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (animator != null)
         {
             animator.SetTrigger(deathAnimTrigger);
         }
 
-        // 2. Í£Ö¹Íæ¼ÒÒÆ¶¯ (½ûÓÃÒÆ¶¯½Å±¾)
+        
         if (movementScript != null)
         {
             movementScript.enabled = false;
         }
 
-        // ¿ÉÑ¡£º½ûÓÃÅö×²Ìå£¬·ÀÖ¹Ê¬Ìåµ²Â·
+        // ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½å£¬ï¿½ï¿½Ö¹Ê¬ï¿½åµ²Â·
         Collider col = GetComponent<Collider>();
         if (col != null) col.enabled = false;
 
-        // 3. ÆÁÄ»±äºÚ
+        // 3. ï¿½ï¿½Ä»ï¿½ï¿½ï¿½
         if (blackScreenPanel != null)
         {
             blackScreenPanel.gameObject.SetActive(true);
@@ -78,7 +78,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    // Ð­³Ì£º¿ØÖÆÍ¸Ã÷¶È½¥±ä
+    // Ð­ï¿½Ì£ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½È½ï¿½ï¿½ï¿½
     IEnumerator FadeToBlack()
     {
         Color color = blackScreenPanel.color;
@@ -86,7 +86,7 @@ public class PlayerHealth : MonoBehaviour
         {
             color.a += Time.deltaTime * fadeSpeed;
             blackScreenPanel.color = color;
-            yield return null; // µÈ´ýÏÂÒ»Ö¡
+            yield return null; 
         }
     }
 }
