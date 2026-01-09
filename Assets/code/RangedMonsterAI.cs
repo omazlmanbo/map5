@@ -107,7 +107,7 @@ public class RangedMonsterAI : MonoBehaviour
         if (Vector2.Distance(transform.position, targetPosition) < 0.1f)
         {
             // 在初始位置周围随机选择一个新目标
-            Vector2 randomOffset = Random.insideCircle * idleMoveRange;
+            Vector2 randomOffset = Random.insideUnitCircle * idleMoveRange;
             targetPosition = startPosition + new Vector3(randomOffset.x, randomOffset.y, 0);
         }
     }
